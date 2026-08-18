@@ -1,0 +1,14 @@
+{
+  "name": "wa-dashboard",
+  "version": "1.0.0",
+  "description": "WhatsApp Cloud API dashboard for Termux/Linux",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.0.0",
+    "dotenv": "^16.0.0",
+    "express": "^5.0.0"
+  }
+}
