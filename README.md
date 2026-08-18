@@ -5,7 +5,7 @@ Dashboard lokal untuk WhatsApp Cloud API resmi, cocok untuk Termux/Linux.
 ## Menjalankan setelah clone
 
 ```bash
-git clone https://github.com/THAR-03/wa-dashboard
+git clone https://github.com/THAR-03/wa-dashboard.git
 cd wa-dashboard
 chmod +x start.sh
 ./start.sh
