@@ -1,1 +1,115 @@
-asdffx
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WhatsApp Dashboard</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+    }
+    .header {
+      padding: 18px;
+      background: #1f1f1f;
+      border-bottom: 1px solid #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+    .card {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #111;
+      color: #fff;
+    }
+    button {
+      cursor: pointer;
+      background: #25D366;
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>WhatsApp Dashboard</h2>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h3>Kirim Pesan</h3>
+
+      <input
+        id="number"
+        placeholder="Nomor tujuan, contoh 628123456789"
+      >
+
+      <textarea
+        id="message"
+        rows="5"
+        placeholder="Tulis pesan..."
+      ></textarea>
+
+      <button onclick="sendMessage()">Kirim Pesan</button>
+
+      <p id="status"></p>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const number =
+        document.getElementById("number").value.trim();
+
+      const message =
+        document.getElementById("message").value.trim();
+
+      const status =
+        document.getElementById("status");
+
+      if (!number || !message) {
+        status.textContent =
+          "Nomor dan pesan wajib diisi.";
+        return;
+      }
+
+      status.textContent = "Mengirim...";
+
+      try {
+        const response = await fetch("/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            number,
+            message
+          })
+        });
+
+        const result = await response.json();
+
+        status.textContent =
+          result.message || "Selesai.";
+      } catch (error) {
+        status.textContent =
+          "Terjadi kesalahan.";
+      }
+    }
+  </script>
+</body>
+</html>
